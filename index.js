@@ -1,9 +1,7 @@
-// TODO: Include packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-// TODO: Create an array of questions for user input
-const questions = [
+inquirer.prompt([
     {
         type: "input",
         name: "ProjectTitle",
@@ -40,13 +38,45 @@ const questions = [
         name: "Tests",
         message:"write tests for your application. Then provide examples on how to run them here",
     }
-];
+]).then(response => { 
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+    fs.writeFile("README.md",`# ${response.ProjectTitle}\n`, err =>{
+        if (err){
+            console.error(err)
+            return;
+        }
+        fs.appendFile("README.md",`\n## Description\n${response.Description}`, err =>{
+            if (err){
+                console.error(err)
+                return;
+            }
+            fs.appendFile("README.md",`\n## Installation\n${response.Installation}`, err =>{
+                if (err){
+                    console.error(err)
+                    return;
+                }
+                fs.appendFile("README.md",`\n## Usage\n${response.Usage}`, err =>{
+                    if (err){
+                        console.error(err)
+                        return;
+                    }
+                    fs.appendFile("README.md",`\n## Usage\n${response.Contributing}`, err =>{
+                        if (err){
+                            console.error(err)
+                            return;
+                        }
+                        fs.appendFile("README.md",`\n## Usage\n${response.Tests}`, err =>{
+                            if (err){
+                                console.error(err)
+                                return;
+                            }
+                            console.log("File written");
+                        })
+                    })
 
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
+                })
+                
+            })
+        })
+    })
+})
