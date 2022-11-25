@@ -1,45 +1,42 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-inquirer.prompt([
-    {
+inquirer.prompt([{
         type: "input",
         name: "ProjectTitle",
-        message: "please input a descriptive title for this project"
-    },
-    {
+        message: "please input a descriptive title for this product"
+    },{
         type: "input",
         name: "Description",
-        message:"please describe why this project was built and what problems does it solve?",
-    },    
-    {
+        message:"please describe why this product was built and what problems does it solve?",
+    },{
         type:"input",
         name: "Installation",
         message:"dose the product need to be installed? if so please elaborate",
-    },
-    {
+    },{
         type:"input",
         name: "Usage",
         message:"please provide instructions and examples on how to use this product",
-    },
-    // {
-    //     type:"list",
-    //     name: "license",
-    //     choices: ["MIT", "GPL", "Apache", "GNU", 'N/A'],
-    //     message:"write tests for your application. Then provide examples on how to run them here",
-    // },    
-    {
+    },{
+        type:"list",
+        name: "License",
+        choices: ["N/A", "Apache License 2.0", "GNU General Public License v3.0",
+                "MIT License", "BSD 2-Clause License", "BSD 3-Clause License", 
+                "Boost Software License 1.0", "Creative Commons Zero v1.0 Universal", "Eclipse Public License 2.0", 
+                "GNU Affero General Public License v3.0", "GNU General Public License v2.0", "GNU Lesser General Public License v2.1", 
+                "Mozilla Public License 2.0", "The Unlicense"],
+        message:"please choose a license?",
+    },{
         type:"input",
         name: "Contributing",
         message:"please provide: attribution, references and links for work that has been used to assist in this project",
-    },
-    {
+    },{
         type:"input",
         name: "Tests",
         message:"write tests for your application. Then provide examples on how to run them here",
-    }
-]).then(response => { 
-
+    }])
+    
+    .then(response => { 
     fs.writeFile("README.md",`# ${response.ProjectTitle}\n`, err =>{
         if (err){
             console.error(err)
@@ -60,17 +57,23 @@ inquirer.prompt([
                         console.error(err)
                         return;
                     }
-                    fs.appendFile("README.md",`\n## Usage\n${response.Contributing}`, err =>{
-                        if (err){
-                            console.error(err)
-                            return;
-                        }
-                        fs.appendFile("README.md",`\n## Usage\n${response.Tests}`, err =>{
-                            if (err){
+                        fs.appendFile("README.md",`\n## License\n${response.License}`, err =>{
+                            if(err){
                                 console.error(err)
                                 return;
                             }
-                            console.log("File written");
+                            fs.appendFile("README.md",`\n## Usage\n${response.Contributing}`, err =>{
+                                if (err){
+                                    console.error(err)
+                                    return;
+                                }
+                                fs.appendFile("README.md",`\n## Usage\n${response.Tests}`, err =>{
+                                    if (err){
+                                        console.error(err)
+                                        return;
+                                    }
+                                console.log("File written");
+                            })
                         })
                     })
 
