@@ -34,52 +34,38 @@ inquirer.prompt([{
         type:"input",
         name: "Tests",
         message:"write tests for your application. Then provide examples on how to run them here",
-    }])
+}])
     
-    .then(response => { 
-    fs.writeFile("README.md",`# ${response.ProjectTitle}\n`, err =>{
-        if (err){
-            console.error(err)
-            return;
-        }
-        fs.appendFile("README.md",`\n## Description\n${response.Description}`, err =>{
-            if (err){
-                console.error(err)
-                return;
-            }
-            fs.appendFile("README.md",`\n## Installation\n${response.Installation}`, err =>{
-                if (err){
-                    console.error(err)
-                    return;
-                }
-                fs.appendFile("README.md",`\n## Usage\n${response.Usage}`, err =>{
-                    if (err){
-                        console.error(err)
-                        return;
-                    }
-                        fs.appendFile("README.md",`\n## License\n${response.License}`, err =>{
-                            if(err){
-                                console.error(err)
-                                return;
-                            }
-                            fs.appendFile("README.md",`\n## Usage\n${response.Contributing}`, err =>{
-                                if (err){
-                                    console.error(err)
-                                    return;
-                                }
-                                fs.appendFile("README.md",`\n## Usage\n${response.Tests}`, err =>{
-                                    if (err){
-                                        console.error(err)
-                                        return;
-                                    }
-                                console.log("File written");
-                            })
-                        })
-                    })
+    
+.then(response => { 
+fs.writeFile("README.md",
+`# ${response.ProjectTitle}\n
 
-                })
-                
-            })
-        })
-    })
-})
+## Table of Contents
+* [Description](#description)
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+* [Contributing](#contributing)
+* [Tests](#tests)
+
+## Description
+${response.Description}
+
+## Installation
+${response.Installation}
+
+## Usage
+${response.Usage}
+
+## License
+${response.License}
+
+## Usage
+${response.Contributing}
+
+## Tests
+${response.Tests}`,
+
+err => err ? console.error(err) : console.log("File written")
+)})
