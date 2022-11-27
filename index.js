@@ -34,20 +34,29 @@ inquirer.prompt([{
         type:"input",
         name: "Tests",
         message:"write tests for your application. Then provide examples on how to run them here",
-}])
+    },{
+        type:"input",
+        name: "GitHub",
+        message:"please enter GitHub username",
+    },{
+        type:"input",
+        name: "Email",
+        message:"please enter email address",
+    }])
     
-    
+    // note that in the table of contents the #section title (within the normal brackets) have to be in lowercase
 .then(response => { 
 fs.writeFile("README.md",
 `# ${response.ProjectTitle}\n
 
 ## Table of Contents
-* [Description](#description)
+* [Description](#description) 
 * [Installation](#installation)
 * [Usage](#usage)
 * [License](#license)
 * [Contributing](#contributing)
 * [Tests](#tests)
+* [Questions](#questions)
 
 ## Description
 ${response.Description}
@@ -65,7 +74,12 @@ ${response.License}
 ${response.Contributing}
 
 ## Tests
-${response.Tests}`,
+${response.Tests}
+
+## Questions
+${response.GitHub}
+\n
+${response.Email}`,
 
 err => err ? console.error(err) : console.log("File written")
 )})
