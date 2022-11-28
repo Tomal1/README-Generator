@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const generateMarkdown = require("./utils/generateMarkdown");
 
 inquirer.prompt([{
         type: "input",
@@ -21,7 +20,7 @@ inquirer.prompt([{
     },{
         type:"list",
         name: "License",
-        choices: ["N/A", "Apache License 2.0", "GNU General Public License v3.0", "MIT License"],
+        choices: ["N/A", "Apache", "GNU", "MIT"],
         message:"please choose a license?",
     },{
         type:"input",
@@ -45,6 +44,7 @@ inquirer.prompt([{
 .then(response => { 
 fs.writeFile("README.md",
 `# ${response.ProjectTitle}\n
+![${response.License}](https://img.shields.io/badge/license-${response.License}-green)
 
 ## Table of Contents
 * [Description](#description) 
@@ -65,7 +65,7 @@ ${response.Installation}
 ${response.Usage}
 
 ## License
-${response.License}
+this application is covered under ${response.License} license, note (N/A means not applicable)
 
 ## Usage
 ${response.Contributing}
@@ -74,8 +74,7 @@ ${response.Contributing}
 ${response.Tests}
 
 ## Questions
-${response.GitHub}
-\n
+${response.GitHub}\n
 ${response.Email}`,
 
 err => err ? console.error(err) : console.log("File written")

@@ -1,5 +1,6 @@
-# kdndkj
+# 
 
+![GNU](https://img.shields.io/badge/license-GNU-green)
 
 ## Table of Contents
 * [Description](#description) 
@@ -11,25 +12,23 @@
 * [Questions](#questions)
 
 ## Description
-alsdkjladjda
+
 
 ## Installation
-akdhakhdakjads
+
 
 ## Usage
-akdhdakdhaskdasj
+
 
 ## License
-MIT License
+GNU
 
 ## Usage
-aksdhakdsjhas
+
 
 ## Tests
-kadsjhasdkhadksj
+
 
 ## Questions
-kadsjhakdsjhd
 
 
-kadsjhkdasjhdsik
