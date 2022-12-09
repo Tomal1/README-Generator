@@ -36,6 +36,10 @@ inquirer.prompt([{
         message:"please enter GitHub username",
     },{
         type:"input",
+        name: "Links",
+        message:"please enter links to deployed websites or other relevant links hear",
+    },{
+        type:"input",
         name: "Email",
         message:"please enter email address",
     }])
@@ -65,7 +69,12 @@ ${response.Installation}
 ${response.Usage}
 
 ## License
-this application is covered under ${response.License} license, note (N/A means not applicable)
+This application is covered under ${response.License} license, NOTE - N/A means not applicable
+
+## Contributing
+The License badges displayed above were created using the assistance of https://shields.io/ , please visit their website for more information\n 
+${response.Contributing}
+
 
 ## Usage
 ${response.Contributing}
@@ -75,6 +84,7 @@ ${response.Tests}
 
 ## Questions
 ${response.GitHub}\n
+${response.Links}\n
 ${response.Email}`,
 
 err => err ? console.error(err) : console.log("File written")
